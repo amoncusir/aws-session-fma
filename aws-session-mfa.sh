@@ -8,6 +8,7 @@ FALSE=1
 CR=`echo $'\n'.`
 CR=${CR%.}
 
+## Change for you aws account!
 AWS_SESSION="arn:aws:iam::XXXXXXXXXXXX:mfa/<username>"
 
 ## Functions ###########################################################################################################
@@ -47,7 +48,7 @@ checkProgram ()
 ## Steps ###############################################################################################################
 
 if [[ "${BASH_SOURCE[0]}" = "${0}" ]] ; then
-    echo "This script needs to run using source command!"
+    echo "This script needs to run using source command!, run in terminal like: source aws-session-mfa"
     exit 1
 fi
 
@@ -75,6 +76,7 @@ else
         export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r ".Credentials.SessionToken")"
 
         echo "Success login with access: $AWS_ACCESS_KEY_ID"
+        echo "Remember, the aws session is only valid in this terminal session"
 
     fi
 fi
